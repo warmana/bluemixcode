@@ -33,7 +33,8 @@ if 'VCAP_SERVICES' in os.environ:
   target.write("Got vcap_servicesData\n")
   cloudantNoSQLDBData = vcap_servicesData['cloudantNoSQLDB']
   target.write("Got cloudantNoSQLDBData\n")
-  credentialsData = cloudantNoSQLDBData['credentials']
+  credentials = cloudantNoSQLDBData[0]
+  credentialsData = credentials['credentials']
   target.write("Got credentialsData\n")
   username = credentialsData['username']
   target.write("Got username\n")
