@@ -11,6 +11,24 @@ PORT = int(os.getenv('PORT', 8000))
 # Change current directory to avoid exposure of control files
 os.chdir('static')
 
+filename = "environ.txt"
+
+target = open(filename, 'w')
+
+target.truncate()
+
+for entry in os.environ:
+  target.write(entry)
+  target.write("\n")
+
+target.write("====\n")
+
+if 'VCAP_SERVICES' in os.environ:
+  target.write(os.environ['VCAP_SERVICES'])
+  target.write("\n")
+
+target.close()
+
 httpd = Server(("", PORT), Handler)
 try:
   print("Start serving at port %i" % PORT)
