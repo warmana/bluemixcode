@@ -1,4 +1,6 @@
 import os
+import json
+
 try:
   from SimpleHTTPServer import SimpleHTTPRequestHandler as Handler
   from SocketServer import TCPServer as Server
@@ -26,6 +28,23 @@ target.write("====\n")
 if 'VCAP_SERVICES' in os.environ:
   target.write(os.environ['VCAP_SERVICES'])
   target.write("\n")
+  # Now let's parse the JSON...
+  vcap_servicesData = json.loads(os.environ['VCAP_SERVICES'])
+  target.write("Got vcap_servicesData\n")
+  cloudantNoSQLDBData = vcap_servicesData['cloudantNoSQLDB']
+  target.write("Got cloudantNoSQLDBData\n")
+  credentialsData = cloudantNoSQLDBData['credentials']
+  target.write("Got credentialsData\n")
+  username = credentialsData['username']
+  target.write("Got username\n")
+  target.write(username)
+  target.write("\n")
+  password = credentialsData['password']
+  target.write("Got password\n")
+  target.write(password)
+  target.write("\n")
+
+target.write("====\n")
 
 target.close()
 
