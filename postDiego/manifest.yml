@@ -1,0 +1,10 @@
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: mybluemix.net
+  name: Cloudant Python
+  host: Cloudant-Python
+  disk_quota: 1024M
+  services:
+  - Cloudant Service 2017
